@@ -122,12 +122,12 @@ def validate() -> bool:
                 print(f"FAIL: Refusal item {item_id} must have status='ready', got: {entry['status']}")
                 return False
         elif item_type == "sql":
-            if entry["status"] != "pending_db":
-                print(f"FAIL: SQL item {item_id} must have status='pending_db', got: {entry['status']}")
+            if entry["status"] not in ("pending_db", "ready"):
+                print(f"FAIL: SQL item {item_id} status must be 'pending_db' or 'ready', got: {entry['status']}")
                 return False
         elif item_type in ("docs", "both"):
-            if entry["status"] != "pending_docs":
-                print(f"FAIL: Docs/Both item {item_id} must have status='pending_docs', got: {entry['status']}")
+            if entry["status"] not in ("pending_docs", "ready"):
+                print(f"FAIL: Docs/Both item {item_id} status must be 'pending_docs' or 'ready', got: {entry['status']}")
                 return False
 
     print("\n[PASS] All entries satisfy schema integrity, ID uniqueness, and field constraints.")

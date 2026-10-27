@@ -138,136 +138,136 @@
     "id": "Q016",
     "question": "What was total revenue in 2017?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "733215.26",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT ROUND(SUM(sales),2) FROM orders WHERE order_year=2017;",
+    "status": "ready"
   },
   {
     "id": "Q017",
     "question": "Top 5 products by revenue in Q3 2017?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "GBC DocuBind TL300 Electric Binding System: 6458.33; Martin Yale Chadless Opener Electric Letter Opener: 4663.74; HON 5400 Series Task Chairs for Big and Tall: 4416.17; Samsung Galaxy Mega 6.3: 4367.9; Fellowes PB300 Plastic Comb Binding Machine: 4112.69",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT product_name, ROUND(SUM(sales),2) AS revenue FROM orders WHERE order_year=2017 AND order_quarter=3 GROUP BY product_name ORDER BY revenue DESC LIMIT 5;",
+    "status": "ready"
   },
   {
     "id": "Q018",
     "question": "Which region had the highest profit in 2016?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "West: 24051.61",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT region, ROUND(SUM(profit),2) AS p FROM orders WHERE order_year=2016 GROUP BY region ORDER BY p DESC LIMIT 1;",
+    "status": "ready"
   },
   {
     "id": "Q019",
     "question": "What is the average discount by Segment?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Consumer: 0.1581; Corporate: 0.1582; Home Office: 0.1471",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT segment, ROUND(AVG(discount),4) FROM orders GROUP BY segment;",
+    "status": "ready"
   },
   {
     "id": "Q020",
     "question": "How many unique customers ordered in 2017?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "693",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT COUNT(DISTINCT customer_id) FROM orders WHERE order_year=2017;",
+    "status": "ready"
   },
   {
     "id": "Q021",
     "question": "Which sub-category has the lowest profit margin overall?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Tables: -8.56",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT sub_category, ROUND(SUM(profit)*100.0/SUM(sales),2) AS margin_pct FROM orders GROUP BY sub_category ORDER BY margin_pct ASC LIMIT 1;",
+    "status": "ready"
   },
   {
     "id": "Q022",
     "question": "Show monthly revenue for 2017.",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "1: 43971.37; 2: 20301.13; 3: 58872.35; 4: 36521.54; 5: 44261.11; 6: 52981.73; 7: 45264.42; 8: 63120.89; 9: 87866.65; 10: 77776.92; 11: 118447.82; 12: 83829.32",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT order_month, ROUND(SUM(sales),2) FROM orders WHERE order_year=2017 GROUP BY order_month ORDER BY order_month;",
+    "status": "ready"
   },
   {
     "id": "Q023",
     "question": "Which state has the most orders?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "California: 1021",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT state, COUNT(DISTINCT order_id) AS n FROM orders GROUP BY state ORDER BY n DESC LIMIT 1;",
+    "status": "ready"
   },
   {
     "id": "Q024",
     "question": "What was the year-over-year revenue growth from 2016 to 2017?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "20.36",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT ROUND((SUM(CASE WHEN order_year=2017 THEN sales END) / SUM(CASE WHEN order_year=2016 THEN sales END) - 1) * 100, 2) FROM orders;",
+    "status": "ready"
   },
   {
     "id": "Q025",
     "question": "Which Ship Mode is used most often?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Standard Class: 2994",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT ship_mode, COUNT(DISTINCT order_id) AS n FROM orders GROUP BY ship_mode ORDER BY n DESC LIMIT 1;",
+    "status": "ready"
   },
   {
     "id": "Q026",
     "question": "List the top 10 customers by total sales.",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Sean Miller: 25043.05; Tamara Chand: 19052.22; Raymond Buch: 15117.34; Tom Ashbrook: 14595.62; Adrian Barton: 14473.57; Ken Lonsdale: 14175.23; Sanjit Chand: 14142.33; Hunter Lopez: 12873.3; Sanjit Engle: 12209.44; Christopher Conant: 12129.07",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT customer_name, ROUND(SUM(sales),2) AS t FROM orders GROUP BY customer_id, customer_name ORDER BY t DESC LIMIT 10;",
+    "status": "ready"
   },
   {
     "id": "Q027",
     "question": "What percent of orders had a discount above 20%?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "13.94",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT ROUND(100.0*SUM(CASE WHEN discount>0.2 THEN 1 ELSE 0 END)/COUNT(*),2) FROM orders;",
+    "status": "ready"
   },
   {
     "id": "Q028",
     "question": "Which category had negative total profit in any region?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Furniture | Central | -2871.05",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT category, region, ROUND(SUM(profit),2) AS p FROM orders GROUP BY category, region HAVING p < 0;",
+    "status": "ready"
   },
   {
     "id": "Q029",
     "question": "What is the average order value by Segment?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "Consumer: 449.11; Corporate: 466.41; Home Office: 472.67",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT segment, ROUND(AVG(order_total),2) FROM (SELECT order_id, segment, SUM(sales) AS order_total FROM orders GROUP BY order_id, segment) GROUP BY segment;",
+    "status": "ready"
   },
   {
     "id": "Q030",
     "question": "How many orders were placed in Q4 2016?",
     "type": "sql",
-    "expected_answer": null,
+    "expected_answer": "464",
     "expected_sources": [],
-    "gold_sql": null,
-    "status": "pending_db"
+    "gold_sql": "SELECT COUNT(DISTINCT order_id) FROM orders WHERE order_year=2016 AND order_quarter=4;",
+    "status": "ready"
   },
   {
     "id": "Q031",
